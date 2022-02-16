@@ -1,4 +1,4 @@
-FROM elixir:latest
+FROM elixir:1.11.2
 
 # Install debian packages
 RUN apt-get update && \
