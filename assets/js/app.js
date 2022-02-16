@@ -12,4 +12,6 @@ import "../css/app.scss"
 //     import {Socket} from "phoenix"
 //     import socket from "./socket"
 //
-
+import "phoenix_html"
+import Turbolinks from "turbolinks"
+Turbolinks.start();

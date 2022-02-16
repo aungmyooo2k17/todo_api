@@ -7,16 +7,16 @@
 # General application configuration
 use Mix.Config
 
-config :todo_api,
-  ecto_repos: [TodoApi.Repo]
+config :app,
+  ecto_repos: [App.Repo]
 
 # Configures the endpoint
-config :todo_api, TodoApiWeb.Endpoint,
+config :app, AppWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "XUmcWsiN3RUKXAq8EFwbm7Gf4QdECGUsD+M0A06Vo2jDpdEGIadmQ7BTvJhzzLik",
-  render_errors: [view: TodoApiWeb.ErrorView, accepts: ~w(json), layout: false],
-  pubsub_server: TodoApi.PubSub,
-  live_view: [signing_salt: "AB65BFnf"]
+  secret_key_base: "/dFtq9nub4hRMOK5Bbaqvrw6yglP5P5qS3aZXqUv+rizrkA4lSItOpIwGOboSeOt",
+  render_errors: [view: AppWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: App.PubSub,
+  live_view: [signing_salt: "x2TlvXSe"]
 
 # Configures Elixir's Logger
 config :logger, :console,

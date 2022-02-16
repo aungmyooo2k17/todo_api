@@ -1,19 +1,25 @@
-# Use an official Elixir runtime as a parent image.
 FROM elixir:latest
 
+# Install debian packages
 RUN apt-get update && \
-  apt-get install -y postgresql-client
+    apt-get install --yes build-essential inotify-tools postgresql-client git && \
+    apt-get clean
 
-# Create app directory and copy the Elixir projects into it.
-RUN mkdir /app
-COPY . /app
+ADD . /app
+
+# Install Phoenix packages
+RUN mix local.hex --force && \
+    mix local.rebar --force && \
+    mix archive.install --force hex phx_new 1.5.1
+
+# Install node
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs
+
 WORKDIR /app
+RUN npm --version
+RUN mix deps.get
+RUN npm install --prefix ./assets
 
-# Install Hex package manager.
-RUN mix local.hex --force
+EXPOSE 4000
 
-# Compile the project.
-RUN mix do compile
-
-RUN mix phx.server
-
+CMD ["/app/entrypoint.sh"]
